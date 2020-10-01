@@ -92,7 +92,6 @@ const NavBar = (props) => {
 
   let nav = props.user ? (
     <div>
-      {/* <Link to='/favorites' className='NavBar-link'>MY FAVORITES</Link> */}
       <Menu
         anchorEl={anchorEl}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -108,6 +107,7 @@ const NavBar = (props) => {
         <Link to="/" style={navLink}>
           <MenuItem onClick={handleMenuClose}>HOME</MenuItem>
         </Link>
+        <Link to="/favourites">MY FAVORITES</Link>
       </Menu>
 
       {/* &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -130,6 +130,9 @@ const NavBar = (props) => {
         </Link>
         <Link to="/signup" style={navLink}>
           <MenuItem onClick={handleMenuClose}>SIGN UP</MenuItem>
+        </Link>
+        <Link to="/" style={navLink}>
+          <MenuItem onClick={handleMenuClose}>HOME</MenuItem>
         </Link>
       </Menu>
     </div>

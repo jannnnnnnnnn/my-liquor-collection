@@ -1,6 +1,5 @@
 import React from "react";
 import SearchResults from "../../components/SearchResults/SearchResults";
-import NavBar from "../../components/NavBar/NavBar";
 
 export default function LandingPage(props) {
   return (

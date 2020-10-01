@@ -3,10 +3,10 @@ const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 6;
 
-const productSchema = new mongoose.Schema({
+const myproductSchema = new mongoose.Schema({
   productID: Number,
   myrating: Number,
-  mynotes: String,
+  mynote: String,
   // food_pairing: {
   //   type: mongoose.Schema.Types.ObjectIdring,
   //   //ref allows us to use Unicorn???
@@ -18,12 +18,20 @@ const productSchema = new mongoose.Schema({
   // },
 });
 
+const mylocal_productSchema = new mongoose.Schema({
+  productID: Number, // store Local Product schema ID
+  myrating: Number,
+  mynote: String,
+});
+
 const userSchema = new mongoose.Schema(
   {
     name: String,
     email: { type: String, required: true, lowercase: true, unique: true },
     password: String,
-    products: [productSchema],
+    products: [myproductSchema],
+    local_products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+    mylocal_products: [mylocal_productSchema],
   },
   {
     timestamps: true,

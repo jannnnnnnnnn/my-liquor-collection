@@ -8,6 +8,8 @@ import LandingPage from "../LandingPage/LandingPage";
 import ProductsPage from "../ProductsPage/ProductsPage";
 import LoginPage from "../LoginPage/LoginPage";
 import SignupPage from "../SignupPage/SignupPage";
+import MyproductsPage from "../MyproductsPage/MyproductsPage";
+
 import userService from "../../utils/userService";
 import NavBar from "../../components/NavBar/NavBar";
 
@@ -16,8 +18,11 @@ class App extends React.Component {
     user: null,
     searchInput: "",
     searchData: null,
+    myProducts: [],
   };
-
+  handleUpdateMyProducts = () => {
+    console.log("I am in handleUpdateMyProducts");
+  };
   handleinputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -35,7 +40,22 @@ class App extends React.Component {
   };
 
   handleSignupOrLogin = () => {
-    this.setState({ user: userService.getUser() });
+    this.setState(
+      {
+        user: userService.getUser(),
+      },
+      () =>
+        userService
+          .indexMyProducts()
+          .then((myProducts) => this.setState({ myProducts }))
+    );
+  };
+
+  handleUpdateMyProducts = () => {
+    console.log("i am in handleUpdateMyProducts");
+    userService
+      .indexMyProducts()
+      .then((myProducts) => this.setState({ myProducts }));
   };
 
   handleLogout = () => {
@@ -63,6 +83,8 @@ class App extends React.Component {
               <ProductsPage
                 user={this.state.user}
                 searchData={this.state.searchData}
+                myProducts={this.state.myProducts}
+                handleUpdateMyProducts={this.handleUpdateMyProducts}
                 handleSignupOrLogin={this.handleSignupOrLogin}
               />
             )}
@@ -85,6 +107,17 @@ class App extends React.Component {
                 user={this.state.user}
                 history={history}
                 handleSignupOrLogin={this.handleSignupOrLogin}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/favourites"
+            render={() => (
+              <MyproductsPage
+                user={this.state.user}
+                myProducts={this.state.myProducts}
+                handleUpdateMyProducts={this.handleUpdateMyProducts}
               />
             )}
           />
