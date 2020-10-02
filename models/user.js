@@ -7,19 +7,10 @@ const myproductSchema = new mongoose.Schema({
   productID: Number,
   myrating: Number,
   mynote: String,
-  // food_pairing: {
-  //   type: mongoose.Schema.Types.ObjectIdring,
-  //   //ref allows us to use Unicorn???
-  //   ref:"food",
-  // },
-  // weather_paring: {
-  //   type: mongoose.Schema.Types.ObjectIdring,
-  //   ref:"weather",
-  // },
 });
 
-const mylocal_productSchema = new mongoose.Schema({
-  productID: Number, // store Local Product schema ID
+const mylocalSchema = new mongoose.Schema({
+  productID: String, // store Local Product schema ID
   myrating: Number,
   mynote: String,
 });
@@ -30,8 +21,8 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, lowercase: true, unique: true },
     password: String,
     products: [myproductSchema],
+    mylocals: [mylocalSchema],
     local_products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
-    mylocal_products: [mylocal_productSchema],
   },
   {
     timestamps: true,

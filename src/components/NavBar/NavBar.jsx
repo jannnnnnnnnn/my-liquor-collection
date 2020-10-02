@@ -9,7 +9,8 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import LocalBar from "@material-ui/icons/LocalBar";
+
 import { Link } from "react-router-dom";
 
 //style
@@ -18,6 +19,11 @@ const navFlexgrow = {
 };
 const navLink = {
   textDecoration: "none",
+  color: "#2f576e",
+};
+const navLogo = {
+  textDecoration: "none",
+  color: "white",
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -101,13 +107,12 @@ const NavBar = (props) => {
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
+        <Link to="/favourites" style={navLink}>
+          <MenuItem onClick={handleMenuClose}>FAVORITES</MenuItem>
+        </Link>
         <Link to="" style={navLink} onClick={props.handleLogout}>
           <MenuItem onClick={handleMenuClose}>LOG OUT</MenuItem>
         </Link>
-        <Link to="/" style={navLink}>
-          <MenuItem onClick={handleMenuClose}>HOME</MenuItem>
-        </Link>
-        <Link to="/favourites">MY FAVORITES</Link>
       </Menu>
 
       {/* &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -131,28 +136,28 @@ const NavBar = (props) => {
         <Link to="/signup" style={navLink}>
           <MenuItem onClick={handleMenuClose}>SIGN UP</MenuItem>
         </Link>
-        <Link to="/" style={navLink}>
-          <MenuItem onClick={handleMenuClose}>HOME</MenuItem>
-        </Link>
       </Menu>
     </div>
   );
 
   return (
     <div style={navFlexgrow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: "#2f576e" }}>
         <Toolbar>
-          <IconButton
+          <Link
+            to="/"
+            style={navLogo}
             edge="start"
             className={classes.menuButton}
             color="inherit"
-            aria-label="open drawer"
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title} noWrap>
-            News
-          </Typography>
+            <LocalBar />
+          </Link>
+          <Link to="/" style={navLogo}>
+            <Typography variant="h6" className={classes.title} noWrap>
+              My Liquor Collection
+            </Typography>
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -175,13 +180,13 @@ const NavBar = (props) => {
           <div className={classes.sectionDesktop}>
             <IconButton
               edge="end"
-              aria-label="account of current user"
+              aria-label="open drawer"
               aria-controls={menuId}
-              aria-haspopup="true"
+              // aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <MenuIcon />
             </IconButton>
           </div>
         </Toolbar>

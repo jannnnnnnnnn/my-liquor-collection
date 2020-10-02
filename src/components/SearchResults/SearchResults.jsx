@@ -1,5 +1,7 @@
 import React from "react";
 import SearchResult from "../../components/SearchResult/SearchResult";
+import Typography from "@material-ui/core/Typography";
+import Alert from "@material-ui/core/Typography";
 
 class SearchResults extends React.Component {
   alreadyFavorite = () => {
@@ -65,29 +67,22 @@ class SearchResults extends React.Component {
           result={item}
           myProducts={this.props.myProducts}
           handleUpdateMyProducts={this.props.handleUpdateMyProducts}
+          alertMsg={this.props.alertMsg}
+          changeAlertMsg={this.props.changeAlertMsg}
         />
       ));
     } else if (this.props.searchData) {
-      results = <div>no result</div>;
+      results = (
+        <Typography style={{ color: "white" }}>
+          SORRY, WE CURRENTLY CANNOT FIND THIS ITEM. PLEASE SEARCH AGAIN BY
+          PRODUCT'S NAME
+        </Typography>
+      );
     }
     //-----------
     return (
-      <div style={styles.backcolor}>
-        <div>Search Results</div>
-        {/* <div>{props.searchData && props.searchData[0].id}</div> */}
-        {/* <div>{this.appendingResult()}</div> */}
-        <hr />
+      <div>
         <div style={styles.results}>{results}</div>
-        {/* <div>
-          {this.props.searchData.length > 0 ? (
-            this.props.searchData.map((item, idx) => (
-              <SearchResult result={item} />
-              // <div key={idx}>{item.id}</div>
-            ))
-          ) : (
-            <div>no result</div>
-          )}
-        </div> */}
       </div>
     );
   }

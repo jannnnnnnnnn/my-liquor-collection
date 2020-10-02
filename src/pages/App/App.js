@@ -9,8 +9,11 @@ import ProductsPage from "../ProductsPage/ProductsPage";
 import LoginPage from "../LoginPage/LoginPage";
 import SignupPage from "../SignupPage/SignupPage";
 import MyproductsPage from "../MyproductsPage/MyproductsPage";
+import Alert from "@material-ui/lab/Alert";
 
 import userService from "../../utils/userService";
+import productService from "../../utils/productService";
+
 import NavBar from "../../components/NavBar/NavBar";
 
 class App extends React.Component {
@@ -19,10 +22,17 @@ class App extends React.Component {
     searchInput: "",
     searchData: null,
     myProducts: [],
+    localProducts: null,
+    mylocalProducts: null,
+    alertMsg: null,
   };
-  handleUpdateMyProducts = () => {
-    console.log("I am in handleUpdateMyProducts");
+  changeAlertMsg = (severity, msg) => {
+    this.setState({ alertMsg: <Alert severity={severity}>{msg}</Alert> });
   };
+  resetAlertMsg = () => {
+    this.setState({ alertMsg: null });
+  };
+
   handleinputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -35,27 +45,60 @@ class App extends React.Component {
       );
       this.setState({ searchData: productData });
       console.log(this.state.searchData[0]);
+      //find index all local products and put it in state.localProducts
+      this.resetAlertMsg();
       this.props.history.push("/products");
     }
   };
+
+  retriveAllLocalProducts = async () => {
+    const localProducts = await productService.index();
+    console.log(localProducts);
+    this.setState({ localProducts });
+  };
+
+  retrivemyProducts = async () => {
+    console.log("retrivingmyproducts");
+    userService
+      .indexMyProducts()
+      .then((myProducts) => this.setState({ myProducts }));
+    userService
+      .indexMylocalProducts()
+      .then((mylocalProducts) => this.setState({ mylocalProducts }));
+  };
+
+  componentDidMount() {
+    this.retriveAllLocalProducts();
+  }
 
   handleSignupOrLogin = () => {
     this.setState(
       {
         user: userService.getUser(),
       },
-      () =>
-        userService
-          .indexMyProducts()
-          .then((myProducts) => this.setState({ myProducts }))
+      () => {
+        this.retrivemyProducts();
+        // userService
+        //   .indexMyProducts()
+        //   .then((myProducts) => this.setState({ myProducts }));
+        // userService
+        //   .indexMylocalProducts()
+        //   .then((mylocalProducts) => this.setState({ mylocalProducts }));
+      }
     );
   };
 
-  handleUpdateMyProducts = () => {
+  handleUpdateMyProducts = (productLocation) => {
     console.log("i am in handleUpdateMyProducts");
-    userService
-      .indexMyProducts()
-      .then((myProducts) => this.setState({ myProducts }));
+    if (productLocation == "apiProduct") {
+      userService
+        .indexMyProducts()
+        .then((myProducts) => this.setState({ myProducts }));
+    } else if (productLocation == "localProduct") {
+      userService
+        .indexMylocalProducts()
+        .then((mylocalProducts) => this.setState({ mylocalProducts }));
+    }
   };
 
   handleLogout = () => {
@@ -66,7 +109,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header>Janet's new App</header>
+        {/* <header>Janet's new App</header> */}
         <NavBar
           {...this.state}
           handleinputChange={this.handleinputChange}
@@ -74,8 +117,14 @@ class App extends React.Component {
           handleSignupOrLogin={this.handleSignupOrLogin}
           handleLogout={this.handleLogout}
         />
+        <div>{this.state.alertMsg}</div>
+
         <Switch>
-          <Route exact path="/" render={() => <LandingPage />} />
+          <Route
+            exact
+            path="/"
+            render={() => <LandingPage resetAlertMsg={this.resetAlertMsg} />}
+          />
           <Route
             exact
             path="/products"
@@ -86,6 +135,8 @@ class App extends React.Component {
                 myProducts={this.state.myProducts}
                 handleUpdateMyProducts={this.handleUpdateMyProducts}
                 handleSignupOrLogin={this.handleSignupOrLogin}
+                changeAlertMsg={this.changeAlertMsg}
+                resetAlertMsg={this.resetAlertMsg}
               />
             )}
           />
@@ -96,6 +147,8 @@ class App extends React.Component {
               <SignupPage
                 history={history}
                 handleSignupOrLogin={this.handleSignupOrLogin}
+                resetAlertMsg={this.resetAlertMsg}
+                changeAlertMsg={this.changeAlertMsg}
               />
             )}
           />
@@ -107,6 +160,8 @@ class App extends React.Component {
                 user={this.state.user}
                 history={history}
                 handleSignupOrLogin={this.handleSignupOrLogin}
+                resetAlertMsg={this.resetAlertMsg}
+                changeAlertMsg={this.changeAlertMsg}
               />
             )}
           />
@@ -117,7 +172,13 @@ class App extends React.Component {
               <MyproductsPage
                 user={this.state.user}
                 myProducts={this.state.myProducts}
+                mylocalProducts={this.state.mylocalProducts}
+                localProducts={this.state.localProducts}
                 handleUpdateMyProducts={this.handleUpdateMyProducts}
+                retriveAllLocalProducts={this.retriveAllLocalProducts}
+                retrivemyProducts={this.retrivemyProducts}
+                resetAlertMsg={this.resetAlertMsg}
+                changeAlertMsg={this.changeAlertMsg}
               />
             )}
           />

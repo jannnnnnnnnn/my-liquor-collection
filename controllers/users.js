@@ -9,6 +9,9 @@ module.exports = {
   indexMyProducts,
   deleteMyProduct,
   updateMyProduct,
+  indexMylocalProducts,
+  deleteMylocalProduct,
+  updateMylocalProduct,
 };
 
 async function signup(req, res) {
@@ -68,8 +71,8 @@ async function createMyProduct(req, res) {
       user.products.push(newProduct);
       user.save(function (err) {
         if (err) return err;
+        res.json(req.body);
       });
-      res.json(req.body);
     });
   } catch (err) {
     res.json({ err });
@@ -97,9 +100,11 @@ async function deleteMyProduct(req, res) {
       console.log("i found my user and = " + user._id);
       if (err) return err;
       user.products.id(req.params.id).remove();
-      user.save();
+      user.save(function (err) {
+        if (err) return err;
+        res.json(user.products);
+      });
       // console.log(user.products);
-      res.json(user.products);
     });
   } catch (err) {
     res.json({ err });
@@ -118,14 +123,68 @@ async function updateMyProduct(req, res) {
       console.log("i found my user and = " + user._id);
       if (err) return err;
       user.products.id(req.params.id).set(req.body);
-      user.save();
-      res.json(req.body);
+      user.save(function (err) {
+        if (err) return err;
+        res.json(req.body);
+      });
     });
   } catch (err) {
     res.json({ err });
   }
 }
 
+async function indexMylocalProducts(req, res) {
+  console.log("I am in controller indexMylocalProducts");
+  try {
+    User.findById(req.user._id, function (err, user) {
+      console.log("i found my user and = " + user._id);
+      if (err) return err;
+      console.log(user.mylocals);
+      res.json(user.mylocals);
+    });
+  } catch (err) {
+    res.json({ err });
+  }
+}
+
+async function updateMylocalProduct(req, res) {
+  console.log("i am in controller user updateMylocalProduct");
+  console.log("req params id = " + req.params.id);
+  console.log("req.user id=" + req.user._id);
+  console.log("req.body myrating =" + req.body.myrating);
+  console.log("req.body mynote =" + req.body.mynote);
+
+  try {
+    User.findById(req.user._id, function (err, user) {
+      console.log("i found my user and = " + user._id);
+      if (err) return err;
+      user.mylocals.id(req.params.id).set(req.body);
+      user.save(function (err) {
+        if (err) return err;
+        res.json(req.body);
+      });
+    });
+  } catch (err) {
+    res.json({ err });
+  }
+}
+
+async function deleteMylocalProduct(req, res) {
+  console.log("I am in controller deleteMyProducts");
+  try {
+    User.findById(req.user._id, function (err, user) {
+      console.log("i found my user and = " + user._id);
+      if (err) return err;
+      user.mylocals.id(req.params.id).remove();
+      user.save(function (err) {
+        if (err) return err;
+        res.json(user.mylocals);
+      });
+    });
+  } catch (err) {
+    res.json({ err });
+  }
+}
 // async function isFavProduct(req, res) {
 //   try {
 //     console.log("-----------------------");

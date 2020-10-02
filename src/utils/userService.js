@@ -104,25 +104,47 @@ function deleteMyProduct(product_id) {
   );
 }
 
-const BASE_PRODUCT_URL = "/api/products/";
-
-function createProduct(productData) {
-  console.log("i am in userService createProduct");
-  console.log(productData);
-  // return true;
+function indexMylocalProducts() {
+  console.log("i am in userService indexMylocalProducts");
   const options = {
-    method: "POST",
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + tokenService.getToken(),
+    },
+  };
+  return fetch(BASE_URL + "locals", options).then((res) => res.json(res.body));
+}
+
+function updateMylocalProduct(product_id, myProductInfo) {
+  console.log("i am in userservice updateMylocalProduct");
+  console.log(product_id);
+  console.log(myProductInfo);
+  const options = {
+    method: "PUT",
     headers: new Headers({
       "Content-Type": "application/json",
       Authorization: "Bearer " + tokenService.getToken(),
     }),
-    body: JSON.stringify(productData),
+    body: JSON.stringify(myProductInfo),
   };
-  return fetch(BASE_PRODUCT_URL, options).then((res) => {
-    console.log("I am in userService, and I got a create product response");
-    if (res.ok) return res.json(res);
-    throw new Error("Server-side: Unable to save");
-  });
+  return fetch(BASE_URL + "locals/" + product_id, options).then((res) =>
+    res.json(res.body)
+  );
+}
+
+function deleteMylocalProduct(product_id) {
+  console.log("i am in userservice deleteMylocalProduct");
+  console.log(product_id);
+  const options = {
+    method: "DELETE",
+    headers: new Headers({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + tokenService.getToken(),
+    }),
+  };
+  return fetch(BASE_URL + "locals/" + product_id, options).then((res) =>
+    res.json(res.body)
+  );
 }
 
 export default {
@@ -134,7 +156,9 @@ export default {
   indexMyProducts,
   updateMyProduct,
   deleteMyProduct,
-  createProduct,
+  indexMylocalProducts,
+  updateMylocalProduct,
+  deleteMylocalProduct,
 };
 
 // function alreadyFavorite(productId) {

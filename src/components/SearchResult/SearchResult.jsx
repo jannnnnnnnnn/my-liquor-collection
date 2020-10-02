@@ -17,7 +17,7 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import userService from "../../utils/userService";
-//styles
+//styles------------
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -62,14 +62,19 @@ const SearchResult = (props) => {
     if (props.user) {
       try {
         await userService.createMyProduct(props.result);
-        props.handleUpdateMyProducts();
+        props.handleUpdateMyProducts("apiProduct");
         setCheckFav(true);
-        alert("product saved");
+        props.changeAlertMsg("success", "Product Saved Successfully");
+        // alert("product saved");
       } catch (err) {
-        alert("Sorry, I am unable to save this");
+        props.changeAlertMsg("warning", "Sorry, I am unable to save this");
+
+        // alert("Sorry, I am unable to save this");
       }
     } else {
-      alert("Please signin first");
+      props.changeAlertMsg("info", "Please Sign in First");
+
+      // alert("Please signin first");
     }
   };
 

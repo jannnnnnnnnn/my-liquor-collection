@@ -12,7 +12,10 @@ router.post("/products/:id", checkAuth, usersCtrl.createMyProduct);
 router.get("/favourites", usersCtrl.indexMyProducts);
 router.delete("/favourites/:id", checkAuth, usersCtrl.deleteMyProduct);
 router.put("/favourites/:id", checkAuth, usersCtrl.updateMyProduct);
-// router.get("/favourites", usersCtrl.myProductsIndex);
+
+router.get("/locals", usersCtrl.indexMylocalProducts);
+router.put("/locals/:id", checkAuth, usersCtrl.updateMylocalProduct);
+router.delete("/locals/:id", checkAuth, usersCtrl.deleteMylocalProduct);
 
 /*----- Helper Functions -----*/
 function checkAuth(req, res, next) {

@@ -4,6 +4,9 @@ import SignupForm from "../../components/SignupForm/SignupForm";
 
 class SignupPage extends React.Component {
   state = { message: "" };
+  componentDidMount() {
+    this.props.resetAlertMsg();
+  }
   updateMessage = (msg) => {
     this.setState({ message: msg });
   };

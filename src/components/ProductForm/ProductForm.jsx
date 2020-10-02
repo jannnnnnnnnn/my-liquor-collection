@@ -19,7 +19,7 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-import userService from "../../utils/userService";
+import productService from "../../utils/productService";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,8 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductForm(props) {
   const classes = useStyles();
-
-  const [productInfo, setProductInfo] = React.useState({
+  const initialState = {
     name: "",
     liquor_type: "",
     manufacture: "",
@@ -55,13 +54,28 @@ export default function ProductForm(props) {
     img_url: "",
     abv: 0,
     ibu: 0,
-  });
+  };
+  const [productInfo, setProductInfo] = React.useState(initialState);
+
+  // const [productInfo, setProductInfo] = React.useState({
+  //   name: "",
+  //   liquor_type: "",
+  //   manufacture: "",
+  //   description: "",
+  //   img_url: "",
+  //   abv: 0,
+  //   ibu: 0,
+  // });
   const [foods, setFoods] = React.useState({
-    Chicken: true,
+    Chicken: false,
     Fish: false,
     Beef: false,
   });
-
+  const clearState = () => {
+    console.log("i am in clearning state");
+    setProductInfo({ ...initialState });
+    setFoods({ Chicken: false, Fish: false, Beef: false });
+  };
   const handleFoodsChange = async (event) => {
     setFoods({ ...foods, [event.target.name]: event.target.checked });
   };
@@ -74,14 +88,24 @@ export default function ProductForm(props) {
     console.log(productData);
     if (props.user) {
       try {
-        await userService.createProduct(productData);
-        alert("Product saved");
+        await productService.create(productData);
+        props.retriveAllLocalProducts();
+        props.retrivemyProducts();
+        clearState();
+        // props.history.push("/favourites");
+        props.changeAlertMsg("success", "Product Saved Successfully");
+
+        // alert("Product saved");
+        // props.history.push("/favourites");
+
         //add to front end
       } catch (err) {
         alert(err);
       }
     } else {
-      alert("Please signin first");
+      props.changeAlertMsg("info", "Please signin first");
+
+      // alert("Please signin first");
     }
     // need to add handleUpdateMyProducts
     //update state
@@ -105,7 +129,9 @@ export default function ProductForm(props) {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>Add a Product</Typography>
+          <Typography variant="h6" className={classes.heading}>
+            Add a Product
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <form onSubmit={handleSubmit} className={classes.detailSection}>

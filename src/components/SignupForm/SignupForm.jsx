@@ -1,4 +1,4 @@
-import { FormControl } from "@material-ui/core";
+import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import userService from "../../utils/userService";
@@ -41,79 +41,73 @@ class SignupForm extends Component {
   }
 
   render() {
+    const styles = {
+      main: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "10px",
+      },
+      links: {
+        margin: "10px",
+      },
+    };
     return (
-      <div>
-        <header className="header-footer">Sign Up</header>
-        <form className="form-horizontal" onSubmit={this.handleSubmit}>
-          {/* <FormControl>
+      <div style={styles.main}>
+        <header>Sign Up</header>
+        <form style={styles.main} onSubmit={this.handleSubmit}>
+          <FormControl>
             <InputLabel htmlFor="name">Name</InputLabel>
             <Input
-            id="name"
-            aria-describedby="my-helper-text"
-            value={loginInfo.email}
-            onChange={handleChange}
-          />
-          </FormControl> */}
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Name"
-                value={this.state.name}
-                name="name"
-                onChange={this.handleChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Email"
-                value={this.state.email}
-                name="email"
-                onChange={this.handleChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Password"
-                value={this.state.password}
-                name="password"
-                onChange={this.handleChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Confirm Password"
-                value={this.state.passwordConf}
-                name="passwordConf"
-                onChange={this.handleChange}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
-              <button
-                className="btn btn-default"
-                disabled={this.isFormInvalid()}
-              >
-                Sign Up
-              </button>
-              &nbsp;&nbsp;
-              <Link to="/">Cancel</Link>
-            </div>
-          </div>
+              id="name"
+              name="name"
+              type="text"
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <InputLabel htmlFor="email">Email</InputLabel>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <InputLabel htmlFor="password">Confirm Password</InputLabel>
+            <Input
+              id="passwordConf"
+              name="passwordConf"
+              type="password"
+              value={this.state.passwordConf}
+              onChange={this.handleChange}
+            />
+          </FormControl>
+          <Button
+            style={styles.links}
+            type="submit"
+            variant="contained"
+            disabled={this.isFormInvalid()}
+          >
+            Sign Up
+          </Button>
+
+          <Link style={{ textDecoration: "none", color: "blue" }} to="/">
+            Cancel
+          </Link>
         </form>
       </div>
     );
