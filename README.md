@@ -1,68 +1,85 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# My Liquor Collection
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+[_Link to My Liquor Collection APP_](https://myliquorcollection.herokuapp.com/)
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This is a web application that allows Users to Search, Save, Add, Edit and Delete their favrourite product.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- MERN
+- MongoDB
+- Mongoose
+- Node.js
+- Express
+- Token Auth
+- JSON
+- RESTful API
+- React
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Development
 
-### `npm run build`
+To provide insight of how the application was developed, the following sections are covered:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. [Project Requirements](#requirements)
+2. [User stories](#stories)
+3. [Wireframes](#wireframes)
+4. [Entity Relationship Diagram](#erd)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+**_1. Project Requirements_** <a name="requirements"></a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Technology: MERN
+- Have data entities (2 embedded and 2 referenced)
+- CRUD Application
+- Be deployed online
+- Project duration: 4 Days
+- Project Team: Solo Member
 
-### `npm run eject`
+**_2. User stories_** <a name="stories"></a>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![Trello Diagram](https://i.imgur.com/lklrN4a.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**_3. Wireframes_** <a name="wireframes"></a>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![Inital Loading Wireframe](https://i.imgur.com/yQjyWaw.png)
+![Account Info Wireframe](https://i.imgur.com/OUAzwC1.png)
+![Search Page Wireframe](https://i.imgur.com/Dd1WhzD.png)
+![My Orders Wireframe](https://i.imgur.com/cwuiEIr.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**_3. Entity Relationship Diagram (ERD)_** <a name="erd"></a>
 
-## Learn More
+![ERD Diagram](https://i.imgur.com/FLkNoDG.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Screen shots of the game
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> **_Inital Loading Page_**
 
-### Code Splitting
+![Inital Loading Screen](https://i.imgur.com/0HJfiQa.jpg)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+![Search Screen](https://i.imgur.com/uO3xq5E.png)
 
-### Analyzing the Bundle Size
+> **_Account - Profile Page_**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+![Account - Signup Screen](https://i.imgur.com/0bbOMWQ.png)
 
-### Making a Progressive Web App
+> **_Account - Shopping Cart Page_**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+![Account - Login Screen](https://i.imgur.com/tzWbHZ9.png)
 
-### Advanced Configuration
+> **_Account - My Orders Page_**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+![Account - My Favourites Screen](https://i.imgur.com/b9JGklD.png)
 
-### Deployment
+> **_Account - My Delivery Slots_**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+![Account - Add A Product Screen](https://i.imgur.com/R61fKIE.png)
 
-### `npm run build` fails to minify
+## Future Enhancements
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Obtain many other APIs to be plugged in to the app. Currently the capability is already implemented in the App.
+- Add webscrapping to obtain additional products
+- Include inventory information
+- Add shopping cart
