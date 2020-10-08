@@ -25,11 +25,12 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
   },
   media: {
-    // height: 0,
+    height: 0,
     // paddingTop: "56.25%", // 16:9
-    height: 300,
-    width: "100%",
-    objectFit: "fit",
+    verticalAlign: "bottom",
+    // height: 300,
+    // width: "100%",
+    // objectFit: "fit",
     // paddingBottom: "56.25%",
   },
   expand: {
@@ -44,6 +45,12 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: red[500],
+  },
+
+  picture: {
+    height: 200,
+    // verticalAlign: "bottom",
+    // width: "100%",
   },
 }));
 //------------------
@@ -69,13 +76,9 @@ const SearchResult = (props) => {
         // alert("product saved");
       } catch (err) {
         props.changeAlertMsg("warning", "Sorry, I am unable to save this");
-
-        // alert("Sorry, I am unable to save this");
       }
     } else {
       props.changeAlertMsg("info", "Please Sign in First");
-
-      // alert("Please signin first");
     }
   };
 
@@ -108,7 +111,7 @@ const SearchResult = (props) => {
         title={props.result.name}
         subheader={props.result.tagline}
       />
-      {/* <img src={props.result.image_url} /> */}
+      <img className={classes.picture} src={props.result.image_url} />
       <CardMedia
         className={classes.media}
         image={props.result.image_url}

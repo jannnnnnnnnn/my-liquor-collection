@@ -32,6 +32,8 @@ import apiService from "../../utils/apiService";
 const useStyles = makeStyles((theme) => ({
   root: {
     // maxWidth: 345, //css--------
+    // maxHeight: 100,
+    height: "100%",
     margin: theme.spacing(4),
   },
   //css--------
@@ -57,9 +59,27 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: "rotate(180deg)",
   },
-  // avatar: {
-  //   backgroundColor: red[500],
+  picture: {
+    height: 200,
+    padding: "10px",
+  },
+  foods: {
+    display: "inline-block",
+  },
+  // nospacingbottom: {
+  //   // padding: "0",
+  //   paddingBottom: "0",
   // },
+  nospacing: {
+    padding: "0",
+    // paddingBottom:"0"
+  },
+  cardcontent: {
+    padding: 0,
+    "&:last-child": {
+      paddingBottom: 0,
+    },
+  },
 }));
 //------------------
 
@@ -202,13 +222,13 @@ export default function Myproduct(props) {
                 </IconButton>
               }
             />
-            {/* <img src={props.result.image_url} /> */}
             {props.productLocation == "apiProduct" ? (
-              <CardMedia
-                className={classes.media}
-                image={productData[0].image_url}
-                title={productData[0].name}
-              />
+              // <CardMedia
+              //   className={classes.media}
+              //   image={productData[0].image_url}
+              //   title={productData[0].name}
+              // />
+              <img className={classes.picture} src={productData[0].image_url} />
             ) : (
               <CardMedia
                 className={classes.media}
@@ -216,7 +236,9 @@ export default function Myproduct(props) {
                 title={productData[0].name}
               />
             )}
-            <CardContent>
+            <CardContent
+              className={`${classes.nospacingbottom} ${classes.textinfo}`}
+            >
               <Typography variant="h6">{productData[0].name}</Typography>
               <Typography variant="subtitle1">
                 {productData[0].tagline}
@@ -231,27 +253,28 @@ export default function Myproduct(props) {
                 {productData[0].description}
               </Typography>
               <Typography variant="caption" paragraph>
-                ABV: {productData[0].abv}%
+                ABV: {productData[0].abv}% &nbsp;&nbsp;|&nbsp;&nbsp; IBU:{" "}
+                {productData[0].ibu}
               </Typography>
+
               <Typography variant="caption" paragraph>
-                IBU: {productData[0].ibu}
-              </Typography>
-              <Typography variant="caption" paragraph>
-                Food Pairing
-              </Typography>
-              <Typography variant="caption">
+                Food Pairing: &nbsp;&nbsp;
+                {/* </Typography>
+              <Typography variant="caption"> */}
+                {/* <div style={{ display: "inline-block" }}> */}
                 {productData[0].food_pairing &&
                   productData[0].food_pairing.map((food, idx) => (
-                    <p key={idx}>{food}</p>
+                    <span>{food}, &nbsp;</span>
                   ))}
+                {/* </div> */}
               </Typography>
             </CardContent>
           </div>
           <CardActions disableSpacing>
             <IconButton
-              className={clsx(classes.expand, {
+              className={`${clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
-              })}
+              })} ${classes.nospacing}`}
               onClick={handleExpandClick}
               aria-expanded={expanded}
               aria-label="show more"

@@ -6,7 +6,7 @@
 
 ## Description
 
-This is a web application that allows Users to Search, Save, Add, Edit and Delete their favrourite product.
+This is a web application that allows Users to Search, Save, Add, Edit and Delete their favourite product.
 
 ## Technologies Used
 

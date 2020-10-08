@@ -134,7 +134,6 @@ async function updateMyProduct(req, res) {
 }
 
 async function indexMylocalProducts(req, res) {
-  console.log("I am in controller indexMylocalProducts");
   try {
     User.findById(req.user._id, function (err, user) {
       console.log("i found my user and = " + user._id);
@@ -148,12 +147,6 @@ async function indexMylocalProducts(req, res) {
 }
 
 async function updateMylocalProduct(req, res) {
-  console.log("i am in controller user updateMylocalProduct");
-  console.log("req params id = " + req.params.id);
-  console.log("req.user id=" + req.user._id);
-  console.log("req.body myrating =" + req.body.myrating);
-  console.log("req.body mynote =" + req.body.mynote);
-
   try {
     User.findById(req.user._id, function (err, user) {
       console.log("i found my user and = " + user._id);
@@ -170,7 +163,6 @@ async function updateMylocalProduct(req, res) {
 }
 
 async function deleteMylocalProduct(req, res) {
-  console.log("I am in controller deleteMyProducts");
   try {
     User.findById(req.user._id, function (err, user) {
       console.log("i found my user and = " + user._id);
