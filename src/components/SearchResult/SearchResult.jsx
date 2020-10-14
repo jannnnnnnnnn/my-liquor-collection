@@ -8,10 +8,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -43,10 +41,6 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: "rotate(180deg)",
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
-
   picture: {
     height: 200,
     // verticalAlign: "bottom",
@@ -82,7 +76,21 @@ const SearchResult = (props) => {
     }
   };
 
-  const alreadyFavorite = () => {
+  // const alreadyFavorite = () => {
+  //   if (props.user) {
+  //     let check = false;
+  //     props.myProducts.forEach((myProduct) => {
+  //       if (myProduct.productID == props.result.id) {
+  //         check = true;
+  //       }
+  //     });
+  //     setCheckFav(check);
+  //   } else {
+  //     return false;
+  //   }
+  // };
+
+  useEffect(() => {
     if (props.user) {
       let check = false;
       props.myProducts.forEach((myProduct) => {
@@ -94,10 +102,6 @@ const SearchResult = (props) => {
     } else {
       return false;
     }
-  };
-
-  useEffect(() => {
-    alreadyFavorite();
   }, []);
 
   return (
@@ -111,12 +115,12 @@ const SearchResult = (props) => {
         title={props.result.name}
         subheader={props.result.tagline}
       />
-      <img className={classes.picture} src={props.result.image_url} />
-      <CardMedia
+      <img className={classes.picture} src={props.result.image_url} alt={props.result.name}/>
+      {/* <CardMedia
         className={classes.media}
         image={props.result.image_url}
         title={props.result.name}
-      />
+      /> */}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {props.result.description}

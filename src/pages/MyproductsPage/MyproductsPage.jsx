@@ -2,7 +2,6 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 
 import Myproduct from "../../components/Myproduct/Myproduct";
-import userService from "../../utils/userService";
 import ProductForm from "../../components/ProductForm/ProductForm";
 
 class MyproductsPage extends React.Component {

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import SearchResults from "../../components/SearchResults/SearchResults";
 
 export default function LandingPage(props) {
   useEffect(() => {

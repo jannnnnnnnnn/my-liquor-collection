@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import {
   FormControl,
-  Input,
-  InputLabel,
   Button,
   Box,
   Typography,
@@ -17,15 +15,11 @@ import {
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { makeStyles } from "@material-ui/core/styles";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import clsx from "clsx";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import EditIcon from "@material-ui/icons/Edit";
 
 import userService from "../../utils/userService";
-import { Link } from "react-router-dom";
 import apiService from "../../utils/apiService";
 
 //styles-------------
@@ -181,9 +175,7 @@ export default function Myproduct(props) {
     } else if (props.productLocation == "localProduct") {
       //find it in the localProducts state
       const fetchData = async () => {
-        let dataArry = [];
         const productData = await fetchLocalProductInfo();
-
         console.log("localproductData=" + productData[0].name);
         setProductData(productData);
       };
@@ -199,14 +191,14 @@ export default function Myproduct(props) {
     }
   }, []);
 
-  const fetchProductInfo = async (e) => {
-    const productData = await apiService.getProductbyId(
-      props.myProduct.productID
-    );
-    console.log("productData=" + productData);
-    //set my state
-    setProductData(productData);
-  };
+  // const fetchProductInfo = async (e) => {
+  //   const productData = await apiService.getProductbyId(
+  //     props.myProduct.productID
+  //   );
+  //   console.log("productData=" + productData);
+  //   //set my state
+  //   setProductData(productData);
+  // };
 
   return (
     <div key={props.myProduct.productID}>
@@ -228,13 +220,14 @@ export default function Myproduct(props) {
               //   image={productData[0].image_url}
               //   title={productData[0].name}
               // />
-              <img className={classes.picture} src={productData[0].image_url} />
+              <img className={classes.picture} src={productData[0].image_url} alt={productData[0].name}/>
             ) : (
-              <CardMedia
-                className={classes.media}
-                image={productData[0].img_url}
-                title={productData[0].name}
-              />
+              <img className={classes.picture} src={productData[0].img_url} alt={productData[0].name}/>
+              // <CardMedia
+              //   className={classes.media}
+              //   image={productData[0].img_url}
+              //   title={productData[0].name}
+              // />
             )}
             <CardContent
               className={`${classes.nospacingbottom} ${classes.textinfo}`}

@@ -1,7 +1,6 @@
 import React from "react";
 import SearchResult from "../../components/SearchResult/SearchResult";
 import Typography from "@material-ui/core/Typography";
-import Alert from "@material-ui/core/Typography";
 
 class SearchResults extends React.Component {
   alreadyFavorite = () => {
